@@ -3,19 +3,149 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --sidebar-width: 300px;
+  --header-height: 64px;
+  --content-max-width: 1600px;
+  --content-padding: 2rem;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  margin-top: var(--header-height);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: var(--content-max-width);
+  width: 100%;
+  padding: 0 var(--content-padding);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-closed .main-content {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--content-padding);
+  width: 100%;
+}
+
+.content-container {
+  margin: 0 auto;
+  width: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.grid {
+  width: 100%;
+  display: grid;
+  gap: 0.75rem; /* Reduced base gap */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: center;
+}
+
+.grid-cols-1,
+.grid-cols-2 {
+  @apply max-w-none;
+}
+
+.note-card {
+  @apply w-full max-w-[280px] mx-auto;
+}
+
+
+.sidebar-closed .grid {
+  max-width: var(--content-max-width);
+  margin-left: auto; /* Reset margin when sidebar is closed */
+}
+
+.create-note-container {
+  margin-bottom: 3rem; /* Increased spacing between create note and list */
+  width: 100%;
+  max-width: calc(var(--content-max-width) - var(--sidebar-width) - 2rem);
+  margin-left: calc(var(--sidebar-width) * 0.15); /* Match grid margin */
+}
+
+.sidebar-closed .create-note-container {
+  max-width: var(--content-max-width);
+  margin-left: auto; /* Reset margin when sidebar is closed */
+}
+
+/* Add this new style for better note list containment */
+.note-list-container {
+  width: 100%;
+  padding: 0 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 50px;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #facc16 #111820;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #111820;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #facc16;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e6b914;
+}
+
+/* Add these at the end of your file */
+@layer utilities {
+  .bg-gradient-animated {
+    @apply relative overflow-hidden;
+  }
+
+  .bg-glass {
+    @apply bg-opacity-95 backdrop-blur-md;
+  }
+
+  .bg-primary {
+    background-color: rgba(61, 71, 83, 0.95);
+  }
+
+  .bg-secondary {
+    background-color: rgba(17, 24, 32, 0.95);
+  }
+}
+
+/* Custom background classes */
+.bg-custom-primary {
+  background-color: rgba(61, 71, 83, 0.95);
+}
+
+.bg-custom-dark {
+  background-color: rgba(17, 24, 32, 0.95);
+}
+
+/* Glass effect utilities */
+.glass-effect {
+  backdrop-filter: blur(8px);
+  background-color: rgba(61, 71, 83, 0.8);
+}
+
+.glass-effect-dark {
+  backdrop-filter: blur(8px);
+  background-color: rgba(17, 24, 32, 0.8);
 }
