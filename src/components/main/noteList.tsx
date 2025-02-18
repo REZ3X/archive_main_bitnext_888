@@ -1,6 +1,15 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+
+interface Note {
+  id: string;
+  title: string;
+  content: string;
+  project_id?: string;
+  created_at: string;
+  updated_at: string;
+}
 import NoteCard from './noteCard';
 import { useSidebarStore } from '../store/sidebarStore';
 import SearchBar from './searchBar';
