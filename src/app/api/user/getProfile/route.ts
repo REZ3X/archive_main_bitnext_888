@@ -13,8 +13,8 @@ interface UserRecord extends RowDataPacket {
 
 export async function GET() {
   try {
-    const cookieStore = cookies();
-    const sessionId = await cookieStore.get('session')?.value;
+    const cookieStore = await cookies();
+    const sessionId = cookieStore.get('session')?.value;
 
     if (!sessionId) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
